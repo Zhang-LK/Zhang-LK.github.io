@@ -1,0 +1,46 @@
+.disBase {
+    box-shadow: 0 0 10px #000;
+    border: 1px solid #cfccc9;
+    font-family: "楷体";
+    color: #12264f;
+}
+
+.disBase h1{
+    text-align: center;
+    font-size: 39px;
+}
+
+.disBase h2 {
+    font-size: 30px;
+}
+
+.disBase li {
+    font-size: 28px;
+}
+
+.backPoint {
+    position: relative;
+    top: -180px;
+    left: 0;
+}
+
+.p1 {
+    padding: 10px;
+}
+
+.p1 ul {
+    margin-left: 50px;
+}
+
+.p1 img {
+    width: 880px;
+}
+
+.p2 {
+    margin-top: 15px;
+    padding: 10px;
+}
+
+.p2 img {
+    width: 880px;
+}

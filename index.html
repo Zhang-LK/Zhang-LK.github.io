@@ -15,7 +15,7 @@
 </head>
 <body>
     <!-- 顶部logo -->
-    <div class="warpper bc">
+    <div class="bc">
         <div class="fl logo">
                 <h1>
                     <a href="https://www.hitwh.edu.cn/">
@@ -27,7 +27,7 @@
             <span>无线通信与智能网络实验室</span>
         </div>
     </div>
-    <div class="warpper header">
+    <div class="header" id="top">
         <div class="wcin">
             <div class="fl logo">
                 <h1>
@@ -42,29 +42,54 @@
         </div>
     </div>
 
+    <!-- 浮动导航栏 -->
+    <div class="nav">
+        <ul>
+            <li><a href="#dis">项目介绍</a></li>
+            <li><a href="#top">返回顶部</a></li>
+        </ul>
+    </div>
+
     <!-- 展示内容区域 -->
-    <p>
-        1111111111111111111111111111111111111111
-    </p>
-    <p>
-        1111111111111111111111111111111111111111
-    </p>
-    <p>
-        1111111111111111111111111111111111111111
-    </p>
-    <p>
-        1111111111111111111111111111111111111111
-    </p>
+    <div class="display">
+        <div class="backPoint" id="dis"></div>
+        <div class="disBase p1">
+            <h1>天空地海一体化智慧海洋技术</h1>
+            <hr>
+            <div>
+                <img src="./images/hk.png" alt="天海地空四位一体框架" title="天海地空四位一体框架">
+                <h2>&nbsp;&nbsp;基本模型构成</h2>
+                <ul>
+                    <li><b>天基构成：</b></li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;由高、中、低轨卫星组成的网络</li>
+                    <li><b>空基构成：</b></li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;由无人机、无人艇、以及其他低空自由飞行器构成</li>
+                    <li><b>海基构成：</b></li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;由海上固定基站、船舶、以及一些漂浮传感器构成</li>
+                    <li><b>地基构成：</b></li>
+                    <li>&nbsp;&nbsp;&nbsp;&nbsp;由近岸基站、5G核心网络组成</li>
+                </ul>
+            </div>
+        </div>
+        <div class="disBase p2">
+            <h1>分布式地波雷达</h1>
+            <hr>
+            <div>
+                <img src="./images/leida.png" alt="分布式地波雷达" title="分布式地波雷达">
+            </div>
+        </div>
+    </div>
+    <!-- 展示内容区域 -->
 
     <!-- 版权区域 -->
-    <div class="warpper footer">
+    <div class="footer">
         <div class="fl address">
             <div class="fl school">
                 <span>地址：哈尔滨工业大学(威海)</span>
             </div>
             <div class="fl number">
                 <div>H楼437</div>
-                <div>研学楼712</div>
+                <div>研学楼1号北712</div>
             </div>
         </div>
         <div class="fl contact">
@@ -82,21 +107,70 @@
         </div>
     </div>
     <script>
+        /* ------------- 页面滚动事件 ------------- */
         const bc = document.querySelector('.bc')
-        // const wcin = document.querySelector('.wcin')
-        // 1. 页面滚动事件
+        const nav = document.querySelector('.nav')
+        let a = true  // 滚动条归零标志
         window.addEventListener('scroll', function () {
-            // 当页面滚动到 秒杀模块的时候，就改变 头部的 top值
-            // 页面被卷去的头部 >=  秒杀模块的位置 offsetTop
             const n = document.documentElement.scrollTop
-            // if (n >= sk.offsetTop) {
-            //     header.style.top = 0
-            // } else {
-            //     header.style.top = '-80px'
-            // }
+            // 顶部名称及logo显示
             bc.style.top = n >= 90 ? 0 : '-180px'
-            // wcin.style.backgroundColor = n >= 90 ? 0 : '#1c4ea1'
+
+            // 滚动条自动跳转
+            if (a)  // 滚动条跳转
+            {
+                const id = setInterval(function()
+                {
+                    if(document.documentElement.scrollTop < 720)
+                    {
+                        document.documentElement.scrollTop += 10;
+                    }
+
+                    //当滑动条距顶部为900时,结束间隔任务
+                    if(document.documentElement.scrollTop >= 720)
+                    {
+                        clearInterval(id);
+                    }
+                }, 10);
+            }
+
+            if (!n)  // 重置滚动事件
+            {
+                setTimeout(function ()
+                {
+                    a = document.documentElement.scrollTop <= 0
+                }, 3000)
+            }
+            else
+            {
+                a = false
+            }
+
+            // 侧边导航栏显示
+            if (n >= 720)
+            {
+                changeLocation();
+                nav.style.display = "block";
+                nav.style.opacity = '0.5';
+            }
+            else
+            {
+                nav.style.opacity = "0";
+            }
         })
+
+        /* ------------- 页面缩放事件 ------------- */
+        // const bodyWidth = 0  // 当前窗口的宽度
+        const displayWidth = document.querySelector('.display').offsetWidth
+        window.addEventListener('resize', function () {
+            changeLocation();
+        })
+
+        function changeLocation() {
+            const bodyWidth = document.body.clientWidth;
+            let w = (bodyWidth - displayWidth) / 2 - 150;
+            nav.style.left = w.toString() + 'px';
+        }
     </script>
 </body>
 </html>
